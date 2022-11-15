@@ -132,6 +132,23 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                   return Text('Failed');
                 }
               }),
+              _buildSubHeading(
+                title: 'TV Series',
+                onTap: () =>
+                    Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
+              ),
+              Consumer<MovieListNotifier>(builder: (context, data, child) {
+                final state = data.topRatedMoviesState;
+                if (state == RequestState.Loading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state == RequestState.Loaded) {
+                  return MovieList(data.topRatedMovies);
+                } else {
+                  return Text('Failed');
+                }
+              }),
             ],
           ),
         ),
