@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ditonton/data/models/movie_detail_model.dart';
 import 'package:ditonton/data/models/movie_model.dart';
 import 'package:ditonton/data/models/movie_response.dart';
 import 'package:ditonton/common/exception.dart';
@@ -9,7 +10,7 @@ import 'package:http/http.dart' as http;
 
 abstract class TvRemoteDataSource {
   Future<List<TVModel>> getPopularTVSeries();
-  // Future<MovieDetailResponse> getMovieDetail(int id);
+  Future<MovieDetailResponse> getTvSeriesDetail(int id);
   // Future<List<MovieModel>> searchMovies(String query);
 }
 
@@ -22,7 +23,7 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
   TvRemoteDataSourceImpl({required this.client});
 
   // @override
-  // Future<MovieDetailResponse> getMovieDetail(int id) async {
+  // Future<MovieDetailResponse> getTvSeriesDetail(int id) async {
   //   final response =
   //       await client.get(Uri.parse('$BASE_URL/movie/$id?$API_KEY'));
 
