@@ -6,11 +6,13 @@ import 'package:ditonton/data/models/movie_response.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/data/models/tv_model.dart';
 import 'package:ditonton/data/models/tv_response.dart';
+import 'package:ditonton/data/models/tv_series_detail_model.dart';
 import 'package:http/http.dart' as http;
 
 abstract class TvRemoteDataSource {
   Future<List<TVModel>> getPopularTVSeries();
-  Future<MovieDetailResponse> getTvSeriesDetail(int id);
+  Future<TvSeriesDetailResponse> getTvSeriesDetail(int id);
+  Future<List<TVModel>> getTvSeriesRecommendations(int id);
   // Future<List<MovieModel>> searchMovies(String query);
 }
 
@@ -22,17 +24,17 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
 
   TvRemoteDataSourceImpl({required this.client});
 
-  // @override
-  // Future<MovieDetailResponse> getTvSeriesDetail(int id) async {
-  //   final response =
-  //       await client.get(Uri.parse('$BASE_URL/movie/$id?$API_KEY'));
+  @override
+  Future<TvSeriesDetailResponse> getTvSeriesDetail(int id) async {
+    final response =
+        await client.get(Uri.parse('$BASE_URL/tv/$id?$API_KEY'));
 
-  //   if (response.statusCode == 200) {
-  //     return MovieDetailResponse.fromJson(json.decode(response.body));
-  //   } else {
-  //     throw ServerException();
-  //   }
-  // }
+    if (response.statusCode == 200) {
+      return TvSeriesDetailResponse.fromJson(json.decode(response.body));
+    } else {
+      throw ServerException();
+    }
+  }
 
   // @override
   // Future<List<MovieModel>> searchMovies(String query) async {
@@ -50,6 +52,18 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
   Future<List<TVModel>> getPopularTVSeries() async {
     final response =
         await client.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY'));
+
+    if (response.statusCode == 200) {
+      return TvResponse.fromJson(json.decode(response.body)).tvList;
+    } else {
+      throw ServerException();
+    }
+  }
+  
+  @override
+  Future<List<TVModel>> getTvSeriesRecommendations(int id) async {
+    final response = await client
+        .get(Uri.parse('$BASE_URL/tv/$id/recommendations?$API_KEY'));
 
     if (response.statusCode == 200) {
       return TvResponse.fromJson(json.decode(response.body)).tvList;
