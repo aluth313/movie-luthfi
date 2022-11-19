@@ -1,4 +1,5 @@
 import 'package:ditonton/data/models/genre_model.dart';
+import 'package:ditonton/data/models/season_model.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:equatable/equatable.dart';
@@ -9,7 +10,7 @@ class TvSeriesDetailResponse extends Equatable {
     // required this.backdropPath,
     // required this.budget,
     required this.genres,
-    // required this.homepage,
+    required this.seasons,
     required this.id,
     // required this.imdbId,
     // required this.originalLanguage,
@@ -32,6 +33,7 @@ class TvSeriesDetailResponse extends Equatable {
   // final String? backdropPath;
   // final int budget;
   final List<GenreModel> genres;
+  final List<SeasonModel> seasons;
   // final String homepage;
   final int id;
   // final String? imdbId;
@@ -57,6 +59,8 @@ class TvSeriesDetailResponse extends Equatable {
         // budget: json["budget"],
         genres: List<GenreModel>.from(
             json["genres"].map((x) => GenreModel.fromJson(x))),
+        seasons: List<SeasonModel>.from(
+            json["seasons"].map((x) => SeasonModel.fromJson(x))),
         // homepage: json["homepage"],
         id: json["id"],
         // imdbId: json["imdb_id"],
@@ -81,6 +85,7 @@ class TvSeriesDetailResponse extends Equatable {
         // "backdrop_path": backdropPath,
         // "budget": budget,
         "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
+        "seasons": List<dynamic>.from(genres.map((x) => x.toJson())),
         // "homepage": homepage,
         "id": id,
         // "imdb_id": imdbId,
@@ -103,6 +108,7 @@ class TvSeriesDetailResponse extends Equatable {
   TvDetail toEntity() {
     return TvDetail(
       genres: this.genres.map((genre) => genre.toEntity()).toList(),
+      seasons: this.seasons.map((season) => season.toEntity()).toList(),
       id: this.id,
       overview: this.overview,
       posterPath: this.posterPath,
@@ -116,6 +122,7 @@ class TvSeriesDetailResponse extends Equatable {
   // TODO: implement props
   List<Object?> get props => [
         genres,
+        seasons,
         id,
         overview,
         posterPath,

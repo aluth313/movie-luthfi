@@ -1,9 +1,10 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/data/datasources/movie_local_data_source.dart';
 import 'package:ditonton/data/datasources/tv_local_data_source.dart';
 import 'package:ditonton/data/datasources/tv_remote_data_source.dart';
+import 'package:ditonton/data/models/tv_table.dart';
+import 'package:ditonton/domain/entities/episodes.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
@@ -68,6 +69,18 @@ class TvRepositoryImpl implements TvRepository {
     }
   }
 
+  @override
+  Future<Either<Failure, Episodes>> getEpisodesBySessionNumber(int tvId, int sesionNumber) async {
+    try {
+      final result = await remoteDataSource.getEpisodesBySessionNumber(tvId, sesionNumber);
+      return Right(result.toEntity());
+    } on ServerException {
+      return Left(ServerFailure(''));
+    } on SocketException {
+      return Left(ConnectionFailure('Failed to connect to the network'));
+    }
+  }
+  
   // @override
   // Future<Either<Failure, List<Movie>>> getPopularMovies() async {
   //   try {
@@ -104,18 +117,18 @@ class TvRepositoryImpl implements TvRepository {
   //   }
   // }
 
-  // @override
-  // Future<Either<Failure, String>> saveWatchlist(MovieDetail movie) async {
-  //   try {
-  //     final result =
-  //         await localDataSource.insertWatchlist(MovieTable.fromEntity(movie));
-  //     return Right(result);
-  //   } on DatabaseException catch (e) {
-  //     return Left(DatabaseFailure(e.message));
-  //   } catch (e) {
-  //     throw e;
-  //   }
-  // }
+  @override
+  Future<Either<Failure, String>> saveWatchlist(TvDetail series) async {
+    try {
+      final result =
+          await localDataSource.insertWatchlist(TvTable.fromEntity(series));
+      return Right(result);
+    } on DatabaseException catch (e) {
+      return Left(DatabaseFailure(e.message));
+    } catch (e) {
+      throw e;
+    }
+  }
 
   // @override
   // Future<Either<Failure, String>> removeWatchlist(MovieDetail movie) async {
@@ -128,11 +141,11 @@ class TvRepositoryImpl implements TvRepository {
   //   }
   // }
 
-  // @override
-  // Future<bool> isAddedToWatchlist(int id) async {
-  //   final result = await localDataSource.getMovieById(id);
-  //   return result != null;
-  // }
+  @override
+  Future<bool> isAddedToWatchlist(int id) async {
+    final result = await localDataSource.getSeriesById(id);
+    return result != null;
+  }
 
   // @override
   // Future<Either<Failure, List<Movie>>> getWatchlistMovies() async {

@@ -3,11 +3,13 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
+import 'package:ditonton/domain/entities/season.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation/provider/tv_series_detail_notifier.dart';
+import 'package:ditonton/presentation/widgets/episode_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
@@ -114,12 +116,12 @@ class DetailContent extends StatelessWidget {
                                 //   await Provider.of<TvSeriesDetailNotifier>(
                                 //           context,
                                 //           listen: false)
-                                //       .addWatchlist(movie);
+                                //       .addWatchlist(series);
                                 // } else {
-                                //   await Provider.of<TvSeriesDetailNotifier>(
-                                //           context,
-                                //           listen: false)
-                                //       .removeFromWatchlist(movie);
+                                //   // await Provider.of<TvSeriesDetailNotifier>(
+                                //   //         context,
+                                //   //         listen: false)
+                                //   //     .removeFromWatchlist(movie);
                                 // }
 
                                 // final message =
@@ -159,7 +161,9 @@ class DetailContent extends StatelessWidget {
                               _showGenres(series.genres!),
                             ),
                             Text(
-                              _showDuration(series.runtime![0]),
+                              series.runtime!.length > 0
+                                  ? _showDuration(series.runtime![0])
+                                  : '-',
                             ),
                             Row(
                               children: [
@@ -181,7 +185,80 @@ class DetailContent extends StatelessWidget {
                               style: kHeading6,
                             ),
                             Text(
-                              series.overview!,
+                              series.overview!.isNotEmpty
+                                  ? series.overview!
+                                  : '-',
+                            ),
+                            SizedBox(height: 16),
+                            Text(
+                              'Episodes',
+                              style: kHeading6,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Seasons',
+                                  style: kHeading6,
+                                ),
+                                series.seasons!.length > 0
+                                    ? Consumer<TvSeriesDetailNotifier>(
+                                        builder: (context, data, child) {
+                                          if (data.selectedSeasonIdState ==
+                                              RequestState.Loaded) {
+                                            return DropdownButton(
+                                              value: data.selectedSessionId,
+                                              icon: const Icon(
+                                                  Icons.keyboard_arrow_down),
+                                              items:
+                                                  series.seasons?.map((item) {
+                                                return DropdownMenuItem(
+                                                  value: item.seasonNumber,
+                                                  child: Text(
+                                                      'Season ${item.seasonNumber.toString()}'),
+                                                );
+                                              }).toList(),
+                                              onChanged: (int? newValue) {
+                                                data.fetchEpisodesBySessionNumber(
+                                                    series.id, newValue!);
+                                              },
+                                            );
+                                          }
+                                          return Container();
+                                        },
+                                      )
+                                    : Text('No Season')
+                              ],
+                            ),
+                            Consumer<TvSeriesDetailNotifier>(
+                              builder: (context, dataEpisode, child) {
+                                return Container(
+                                  height: 230,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (context, index) {
+                                      if (dataEpisode.episodeState ==
+                                          RequestState.Loading) {
+                                        return Center(
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      } else if (dataEpisode.episodeState ==
+                                          RequestState.Error) {
+                                        return Text(dataEpisode.message);
+                                      } else if (dataEpisode.episodeState ==
+                                          RequestState.Loaded) {
+                                        return EpisodeCard(
+                                          episode: dataEpisode
+                                              .episodes.episodes[index],
+                                        );
+                                      }
+                                      return Container();
+                                    },
+                                    itemCount:
+                                        dataEpisode.episodes.episodes.length,
+                                  ),
+                                );
+                              },
                             ),
                             SizedBox(height: 16),
                             Text(
@@ -202,42 +279,50 @@ class DetailContent extends StatelessWidget {
                                     RequestState.Loaded) {
                                   return Container(
                                     height: 150,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (context, index) {
-                                        final series = recommendations[index];
-                                        return Padding(
-                                          padding: const EdgeInsets.all(4.0),
-                                          child: InkWell(
-                                            onTap: () {
-                                              Navigator.pushReplacementNamed(
-                                                context,
-                                                TvSeriesDetailPage.ROUTE_NAME,
-                                                arguments: series.id,
+                                    child: recommendations.length > 0
+                                        ? ListView.builder(
+                                            scrollDirection: Axis.horizontal,
+                                            itemBuilder: (context, index) {
+                                              final series =
+                                                  recommendations[index];
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.all(4.0),
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    Navigator
+                                                        .pushReplacementNamed(
+                                                      context,
+                                                      TvSeriesDetailPage
+                                                          .ROUTE_NAME,
+                                                      arguments: series.id,
+                                                    );
+                                                  },
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                      Radius.circular(8),
+                                                    ),
+                                                    child: CachedNetworkImage(
+                                                      imageUrl:
+                                                          'https://image.tmdb.org/t/p/w500${series.posterPath}',
+                                                      placeholder:
+                                                          (context, url) =>
+                                                              Center(
+                                                        child:
+                                                            CircularProgressIndicator(),
+                                                      ),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          Icon(Icons.error),
+                                                    ),
+                                                  ),
+                                                ),
                                               );
                                             },
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(8),
-                                              ),
-                                              child: CachedNetworkImage(
-                                                imageUrl:
-                                                    'https://image.tmdb.org/t/p/w500${series.posterPath}',
-                                                placeholder: (context, url) =>
-                                                    Center(
-                                                  child:
-                                                      CircularProgressIndicator(),
-                                                ),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        Icon(Icons.error),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      itemCount: recommendations.length,
-                                    ),
+                                            itemCount: recommendations.length,
+                                          )
+                                        : Text('There is no recommendations'),
                                   );
                                 } else {
                                   return Container();

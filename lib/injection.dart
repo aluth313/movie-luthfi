@@ -7,6 +7,7 @@ import 'package:ditonton/data/repositories/movie_repository_impl.dart';
 import 'package:ditonton/data/repositories/tv_repository_impl.dart';
 import 'package:ditonton/domain/repositories/movie_repository.dart';
 import 'package:ditonton/domain/repositories/tv_repository.dart';
+import 'package:ditonton/domain/usecases/get_episodes.dart';
 import 'package:ditonton/domain/usecases/get_movie_detail.dart';
 import 'package:ditonton/domain/usecases/get_movie_recommendations.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
@@ -19,6 +20,7 @@ import 'package:ditonton/domain/usecases/get_watchlist_movies.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_status.dart';
 import 'package:ditonton/domain/usecases/remove_watchlist.dart';
 import 'package:ditonton/domain/usecases/save_watchlist.dart';
+import 'package:ditonton/domain/usecases/save_watchlist_tv_series.dart';
 import 'package:ditonton/domain/usecases/search_movies.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
@@ -56,8 +58,9 @@ void init() {
     () => TvSeriesDetailNotifier(
       getTvSeriesDetail: locator(),
       getTvSeriesRecommendations: locator(),
-      // getWatchListStatus: locator(),
-      // saveWatchlist: locator(),
+      getEpisodes: locator(),
+      getWatchListStatus: locator(),
+      saveWatchlist: locator(),
       // removeWatchlist: locator(),
     ),
   );
@@ -104,6 +107,9 @@ void init() {
   locator.registerLazySingleton(() => GetPopularTv(locator()));
   locator.registerLazySingleton(() => GetTvSeriesDetail(locator()));
   locator.registerLazySingleton(() => GetTvSeriesRecommendations(locator()));
+  locator.registerLazySingleton(() => GetEpisodes(locator()));
+  locator.registerLazySingleton(() => GetWatchListStatus(locator()));
+  locator.registerLazySingleton(() => SaveWatchlistTvSeries(locator()));
 
   // repository
   locator.registerLazySingleton<MovieRepository>(
