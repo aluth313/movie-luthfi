@@ -118,10 +118,10 @@ class DetailContent extends StatelessWidget {
                                           listen: false)
                                       .addWatchlist(series);
                                 } else {
-                                  // await Provider.of<TvSeriesDetailNotifier>(
-                                  //         context,
-                                  //         listen: false)
-                                  //     .removeFromWatchlist(movie);
+                                  await Provider.of<TvSeriesDetailNotifier>(
+                                          context,
+                                          listen: false)
+                                      .removeFromWatchlist(series);
                                 }
 
                                 final message =

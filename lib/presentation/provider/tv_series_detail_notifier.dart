@@ -8,6 +8,7 @@ import 'package:ditonton/domain/usecases/get_episodes.dart';
 import 'package:ditonton/domain/usecases/get_tv_series_detail.dart';
 import 'package:ditonton/domain/usecases/get_tv_series_recommendations.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_tv_series_status.dart';
+import 'package:ditonton/domain/usecases/remove_watchlist_tv_series.dart';
 import 'package:ditonton/domain/usecases/save_watchlist_tv_series.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class TvSeriesDetailNotifier extends ChangeNotifier {
   final GetEpisodes getEpisodes;
   final GetWatchListTvSeriesStatus getWatchListStatus;
   final SaveWatchlistTvSeries saveWatchlist;
-  // final RemoveWatchlist removeWatchlist;
+  final RemoveWatchlistSeries removeWatchlist;
 
   TvSeriesDetailNotifier({
     required this.getTvSeriesDetail,
@@ -29,7 +30,7 @@ class TvSeriesDetailNotifier extends ChangeNotifier {
     required this.getEpisodes,
     required this.saveWatchlist,
     required this.getWatchListStatus,
-    // required this.removeWatchlist,
+    required this.removeWatchlist,
   });
 
   late TvDetail _series;
@@ -150,20 +151,20 @@ class TvSeriesDetailNotifier extends ChangeNotifier {
     await loadWatchlistStatus(series.id);
   }
 
-  // Future<void> removeFromWatchlist(TvDetail movie) async {
-  //   final result = await removeWatchlist.execute(movie);
+  Future<void> removeFromWatchlist(TvDetail series) async {
+    final result = await removeWatchlist.execute(series);
 
-  //   await result.fold(
-  //     (failure) async {
-  //       _watchlistMessage = failure.message;
-  //     },
-  //     (successMessage) async {
-  //       _watchlistMessage = successMessage;
-  //     },
-  //   );
+    await result.fold(
+      (failure) async {
+        _watchlistMessage = failure.message;
+      },
+      (successMessage) async {
+        _watchlistMessage = successMessage;
+      },
+    );
 
-  //   await loadWatchlistStatus(movie.id);
-  // }
+    await loadWatchlistStatus(series.id);
+  }
 
   Future<void> loadWatchlistStatus(int id) async {
     final result = await getWatchListStatus.execute(id);

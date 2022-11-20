@@ -130,16 +130,16 @@ class TvRepositoryImpl implements TvRepository {
     }
   }
 
-  // @override
-  // Future<Either<Failure, String>> removeWatchlist(MovieDetail movie) async {
-  //   try {
-  //     final result =
-  //         await localDataSource.removeWatchlist(MovieTable.fromEntity(movie));
-  //     return Right(result);
-  //   } on DatabaseException catch (e) {
-  //     return Left(DatabaseFailure(e.message));
-  //   }
-  // }
+  @override
+  Future<Either<Failure, String>> removeWatchlist(TvDetail series) async {
+    try {
+      final result =
+          await localDataSource.removeWatchlist(TvTable.fromEntity(series));
+      return Right(result);
+    } on DatabaseException catch (e) {
+      return Left(DatabaseFailure(e.message));
+    }
+  }
 
   @override
   Future<bool> isAddedToWatchlist(int id) async {

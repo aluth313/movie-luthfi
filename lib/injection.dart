@@ -21,6 +21,7 @@ import 'package:ditonton/domain/usecases/get_watchlist_status.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_tv_series.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_tv_series_status.dart';
 import 'package:ditonton/domain/usecases/remove_watchlist.dart';
+import 'package:ditonton/domain/usecases/remove_watchlist_tv_series.dart';
 import 'package:ditonton/domain/usecases/save_watchlist.dart';
 import 'package:ditonton/domain/usecases/save_watchlist_tv_series.dart';
 import 'package:ditonton/domain/usecases/search_movies.dart';
@@ -64,7 +65,7 @@ void init() {
       getEpisodes: locator(),
       getWatchListStatus: locator(),
       saveWatchlist: locator(),
-      // removeWatchlist: locator(),
+      removeWatchlist: locator(),
     ),
   );
   locator.registerFactory(
@@ -119,6 +120,7 @@ void init() {
   locator.registerLazySingleton(() => GetWatchListTvSeriesStatus(locator()));
   locator.registerLazySingleton(() => SaveWatchlistTvSeries(locator()));
   locator.registerLazySingleton(() => GetWatchlistSeries(locator()));
+  locator.registerLazySingleton(() => RemoveWatchlistSeries(locator()));
 
   // repository
   locator.registerLazySingleton<MovieRepository>(
