@@ -13,7 +13,7 @@ abstract class TvRepository {
     int sesionNumber,
   );
   Future<Either<Failure, List<Tv>>> getTvSeriesRecommendations(int id);
-  // Future<Either<Failure, List<Movie>>> searchMovies(String query);
+  Future<Either<Failure, List<Tv>>> searchSeries(String query);
   Future<Either<Failure, String>> saveWatchlist(TvDetail series);
   Future<Either<Failure, String>> removeWatchlist(TvDetail series);
   Future<bool> isAddedToWatchlist(int id);
