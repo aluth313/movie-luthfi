@@ -14,6 +14,7 @@ abstract class TvRemoteDataSource {
   Future<EpisodeResponse> getEpisodesBySessionNumber(
       int tvId, int sessionNumber);
   Future<List<TVModel>> getTopRatedSeries();
+  Future<List<TVModel>> getAiringTodaySeries();
   // Future<List<MovieModel>> searchMovies(String query);
 }
 
@@ -31,6 +32,18 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
 
     if (response.statusCode == 200) {
       return TvSeriesDetailResponse.fromJson(json.decode(response.body));
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<TVModel>> getAiringTodaySeries() async {
+    final response =
+        await client.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY'));
+
+    if (response.statusCode == 200) {
+      return TvResponse.fromJson(json.decode(response.body)).tvList;
     } else {
       throw ServerException();
     }

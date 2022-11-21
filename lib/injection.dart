@@ -7,6 +7,7 @@ import 'package:ditonton/data/repositories/movie_repository_impl.dart';
 import 'package:ditonton/data/repositories/tv_repository_impl.dart';
 import 'package:ditonton/domain/repositories/movie_repository.dart';
 import 'package:ditonton/domain/repositories/tv_repository.dart';
+import 'package:ditonton/domain/usecases/get_airing_today_tv_series.dart';
 import 'package:ditonton/domain/usecases/get_episodes.dart';
 import 'package:ditonton/domain/usecases/get_movie_detail.dart';
 import 'package:ditonton/domain/usecases/get_movie_recommendations.dart';
@@ -26,6 +27,7 @@ import 'package:ditonton/domain/usecases/remove_watchlist_tv_series.dart';
 import 'package:ditonton/domain/usecases/save_watchlist.dart';
 import 'package:ditonton/domain/usecases/save_watchlist_tv_series.dart';
 import 'package:ditonton/domain/usecases/search_movies.dart';
+import 'package:ditonton/presentation/provider/airing_today_tv_series_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
@@ -99,6 +101,7 @@ void init() {
     () => TvListNotifier(
       getPopularTv: locator(),
       getTopRatedSeries: locator(),
+      getAiringTodaySeries: locator(),
     ),
   );
   locator.registerFactory(
@@ -107,6 +110,11 @@ void init() {
   locator.registerFactory(
     () => TopRatedSeriesNotifier(
       getTopRatedSeries: locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => AiringTodaySeriesNotifier(
+      getAiringTodaySeries: locator(),
     ),
   );
 
@@ -130,6 +138,7 @@ void init() {
   locator.registerLazySingleton(() => GetWatchlistSeries(locator()));
   locator.registerLazySingleton(() => RemoveWatchlistSeries(locator()));
   locator.registerLazySingleton(() => GetTopRatedSeries(locator()));
+  locator.registerLazySingleton(() => GetAiringTodaySeries(locator()));
 
   // repository
   locator.registerLazySingleton<MovieRepository>(
