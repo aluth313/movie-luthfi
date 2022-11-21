@@ -8,6 +8,7 @@ import 'package:ditonton/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/popular_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
+import 'package:ditonton/presentation/pages/top_rated_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv_series_detail_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
@@ -30,8 +31,9 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
           ..fetchNowPlayingMovies()
           ..fetchPopularMovies()
           ..fetchTopRatedMovies());
-    Future.microtask(() =>
-        Provider.of<TvListNotifier>(context, listen: false)..fetchPopularTv());
+    Future.microtask(() => Provider.of<TvListNotifier>(context, listen: false)
+      ..fetchPopularTv()
+      ..fetchTopRatedSeries());
   }
 
   @override
@@ -89,6 +91,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
+                'Movies',
+                style: kHeading5,
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Text(
                 'Now Playing',
                 style: kHeading6,
               ),
@@ -138,8 +147,15 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                   return Text('Failed');
                 }
               }),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'TV Series',
+                style: kHeading5,
+              ),
               _buildSubHeading(
-                title: 'Popular TV Series',
+                title: 'Popular',
                 onTap: () => Navigator.pushNamed(
                     context, PopularTvSeriesPage.ROUTE_NAME),
               ),
@@ -151,6 +167,23 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                   );
                 } else if (state == RequestState.Loaded) {
                   return TvList(data.popularTv);
+                } else {
+                  return Text('Failed');
+                }
+              }),
+              _buildSubHeading(
+                title: 'Top Rated',
+                onTap: () => Navigator.pushNamed(
+                    context, TopRatedTvSeriesPage.ROUTE_NAME),
+              ),
+              Consumer<TvListNotifier>(builder: (context, data, child) {
+                final state = data.topRatedSeriesState;
+                if (state == RequestState.Loading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state == RequestState.Loaded) {
+                  return TvList(data.topRatedSeries);
                 } else {
                   return Text('Failed');
                 }

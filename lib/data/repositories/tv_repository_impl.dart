@@ -43,7 +43,7 @@ class TvRepositoryImpl implements TvRepository {
       return Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
-  
+
   // @override
   // Future<Either<Failure, List<Movie>>> getNowPlayingMovies() async {
   //   try {
@@ -55,7 +55,6 @@ class TvRepositoryImpl implements TvRepository {
   //     return Left(ConnectionFailure('Failed to connect to the network'));
   //   }
   // }
-
 
   @override
   Future<Either<Failure, List<Tv>>> getTvSeriesRecommendations(int id) async {
@@ -70,9 +69,11 @@ class TvRepositoryImpl implements TvRepository {
   }
 
   @override
-  Future<Either<Failure, Episodes>> getEpisodesBySessionNumber(int tvId, int sesionNumber) async {
+  Future<Either<Failure, Episodes>> getEpisodesBySessionNumber(
+      int tvId, int sesionNumber) async {
     try {
-      final result = await remoteDataSource.getEpisodesBySessionNumber(tvId, sesionNumber);
+      final result =
+          await remoteDataSource.getEpisodesBySessionNumber(tvId, sesionNumber);
       return Right(result.toEntity());
     } on ServerException {
       return Left(ServerFailure(''));
@@ -80,7 +81,7 @@ class TvRepositoryImpl implements TvRepository {
       return Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
-  
+
   // @override
   // Future<Either<Failure, List<Movie>>> getPopularMovies() async {
   //   try {
@@ -93,17 +94,17 @@ class TvRepositoryImpl implements TvRepository {
   //   }
   // }
 
-  // @override
-  // Future<Either<Failure, List<Movie>>> getTopRatedMovies() async {
-  //   try {
-  //     final result = await remoteDataSource.getTopRatedMovies();
-  //     return Right(result.map((model) => model.toEntity()).toList());
-  //   } on ServerException {
-  //     return Left(ServerFailure(''));
-  //   } on SocketException {
-  //     return Left(ConnectionFailure('Failed to connect to the network'));
-  //   }
-  // }
+  @override
+  Future<Either<Failure, List<Tv>>> getTopRatedSeries() async {
+    try {
+      final result = await remoteDataSource.getTopRatedSeries();
+      return Right(result.map((model) => model.toEntity()).toList());
+    } on ServerException {
+      return Left(ServerFailure(''));
+    } on SocketException {
+      return Left(ConnectionFailure('Failed to connect to the network'));
+    }
+  }
 
   // @override
   // Future<Either<Failure, List<Movie>>> searchMovies(String query) async {

@@ -11,7 +11,9 @@ abstract class TvRemoteDataSource {
   Future<List<TVModel>> getPopularTVSeries();
   Future<TvSeriesDetailResponse> getTvSeriesDetail(int id);
   Future<List<TVModel>> getTvSeriesRecommendations(int id);
-  Future<EpisodeResponse> getEpisodesBySessionNumber(int tvId, int sessionNumber);
+  Future<EpisodeResponse> getEpisodesBySessionNumber(
+      int tvId, int sessionNumber);
+  Future<List<TVModel>> getTopRatedSeries();
   // Future<List<MovieModel>> searchMovies(String query);
 }
 
@@ -25,11 +27,22 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
 
   @override
   Future<TvSeriesDetailResponse> getTvSeriesDetail(int id) async {
-    final response =
-        await client.get(Uri.parse('$BASE_URL/tv/$id?$API_KEY'));
+    final response = await client.get(Uri.parse('$BASE_URL/tv/$id?$API_KEY'));
 
     if (response.statusCode == 200) {
       return TvSeriesDetailResponse.fromJson(json.decode(response.body));
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<TVModel>> getTopRatedSeries() async {
+    final response =
+        await client.get(Uri.parse('$BASE_URL/tv/top_rated?$API_KEY'));
+
+    if (response.statusCode == 200) {
+      return TvResponse.fromJson(json.decode(response.body)).tvList;
     } else {
       throw ServerException();
     }
@@ -58,7 +71,7 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
       throw ServerException();
     }
   }
-  
+
   @override
   Future<List<TVModel>> getTvSeriesRecommendations(int id) async {
     final response = await client
@@ -70,11 +83,12 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
       throw ServerException();
     }
   }
-  
+
   @override
-  Future<EpisodeResponse> getEpisodesBySessionNumber(int tvId, int sessionNumber) async {
-    final response =
-        await client.get(Uri.parse('$BASE_URL/tv/$tvId/season/$sessionNumber?$API_KEY'));
+  Future<EpisodeResponse> getEpisodesBySessionNumber(
+      int tvId, int sessionNumber) async {
+    final response = await client
+        .get(Uri.parse('$BASE_URL/tv/$tvId/season/$sessionNumber?$API_KEY'));
 
     if (response.statusCode == 200) {
       return EpisodeResponse.fromJson(json.decode(response.body));
