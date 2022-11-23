@@ -30,7 +30,7 @@ class TVModel extends Equatable {
   final String name;
   final double voteAverage;
   final int voteCount;
-  final String firstAirDate;
+  final String? firstAirDate;
 
   factory TVModel.fromJson(Map<String, dynamic> json) => TVModel(
         backdropPath: json["backdrop_path"],
