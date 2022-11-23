@@ -158,6 +158,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               ),
               _buildSubHeading(
                 title: 'Popular',
+                key: 'popular_series',
                 onTap: () => Navigator.pushNamed(
                     context, PopularTvSeriesPage.ROUTE_NAME),
               ),
@@ -214,7 +215,8 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
     );
   }
 
-  Row _buildSubHeading({required String title, required Function() onTap}) {
+  Row _buildSubHeading(
+      {required String title, required Function() onTap, String? key}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -224,6 +226,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
         ),
         InkWell(
           onTap: onTap,
+          key: key != null ? Key(key) : null,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
