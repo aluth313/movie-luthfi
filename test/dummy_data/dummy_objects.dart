@@ -1,4 +1,5 @@
 import 'package:ditonton/data/models/movie_table.dart';
+import 'package:ditonton/data/models/tv_table.dart';
 import 'package:ditonton/domain/entities/episode.dart';
 import 'package:ditonton/domain/entities/episodes.dart';
 import 'package:ditonton/domain/entities/genre.dart';
@@ -102,9 +103,23 @@ final testMovieTable = MovieTable(
   overview: 'overview',
 );
 
+final testSeriesTable = TvTable(
+  id: 1,
+  name: 'name',
+  posterPath: '/1JupR6vLoYYJb1ySERUCZ3k1qJW.jpg',
+  overview: 'overview',
+);
+
 final testMovieMap = {
   'id': 1,
   'overview': 'overview',
   'posterPath': 'posterPath',
   'title': 'title',
+};
+
+final testSeriesMap = {
+  'id': 1,
+  'overview': 'overview',
+  'posterPath': '/1JupR6vLoYYJb1ySERUCZ3k1qJW.jpg',
+  'name': 'name',
 };
