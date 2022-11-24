@@ -1,12 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/genre.dart';
-import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/entities/movie_detail.dart';
-import 'package:ditonton/domain/entities/season.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
-import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation/provider/tv_series_detail_notifier.dart';
 import 'package:ditonton/presentation/widgets/episode_card_list.dart';
@@ -102,6 +98,7 @@ class DetailContent extends StatelessWidget {
                     Container(
                       margin: const EdgeInsets.only(top: 16),
                       child: SingleChildScrollView(
+                        key: Key('scroll_view_detail_key'),
                         controller: scrollController,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -111,6 +108,7 @@ class DetailContent extends StatelessWidget {
                               style: kHeading5,
                             ),
                             ElevatedButton(
+                              key: Key('watchlist_button_key'),
                               onPressed: () async {
                                 if (!isAddedWatchlist) {
                                   await Provider.of<TvSeriesDetailNotifier>(

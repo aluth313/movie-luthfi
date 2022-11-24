@@ -89,6 +89,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
+          key: Key('scroll_view_key'),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -169,7 +170,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                     child: CircularProgressIndicator(),
                   );
                 } else if (state == RequestState.Loaded) {
-                  return TvList(data.popularTv);
+                  return TvList(data.popularTv, 'popular_series_item');
                 } else {
                   return Text('Failed');
                 }
@@ -186,7 +187,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                     child: CircularProgressIndicator(),
                   );
                 } else if (state == RequestState.Loaded) {
-                  return TvList(data.topRatedSeries);
+                  return TvList(data.topRatedSeries, 'top_rated_series_item');
                 } else {
                   return Text('Failed');
                 }
@@ -203,7 +204,8 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                     child: CircularProgressIndicator(),
                   );
                 } else if (state == RequestState.Loaded) {
-                  return TvList(data.airingTodaySeries);
+                  return TvList(
+                      data.airingTodaySeries, 'airing_today_series_item');
                 } else {
                   return Text('Failed');
                 }
@@ -283,8 +285,9 @@ class MovieList extends StatelessWidget {
 
 class TvList extends StatelessWidget {
   final List<Tv> tvSeries;
+  String seriesKey;
 
-  TvList(this.tvSeries);
+  TvList(this.tvSeries, this.seriesKey);
 
   @override
   Widget build(BuildContext context) {
@@ -297,6 +300,7 @@ class TvList extends StatelessWidget {
           return Container(
             padding: const EdgeInsets.all(8),
             child: InkWell(
+              key: Key('$seriesKey$index'),
               onTap: () {
                 Navigator.pushNamed(
                   context,
