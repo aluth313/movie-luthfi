@@ -21,59 +21,56 @@ class EpisodeCard extends StatelessWidget {
       }
     }
 
-    return InkWell(
-      onTap: () => print('di klik'),
-      child: Container(
-        width: 250,
-        margin: EdgeInsets.only(right: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
+    return Container(
+      width: 250,
+      margin: EdgeInsets.only(right: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
+            child: CachedNetworkImage(
+              height: 150,
+              width: double.infinity,
+              fit: BoxFit.cover,
+              imageUrl: episode.stillPath != null
+                  ? 'https://image.tmdb.org/t/p/w500${episode.stillPath}'
+                  : 'https://www.rrcampus.com/images/no-video.jpg',
+              placeholder: (context, url) => Center(
+                child: CircularProgressIndicator(),
               ),
-              child: CachedNetworkImage(
-                height: 150,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                imageUrl: episode.stillPath != null
-                    ? 'https://image.tmdb.org/t/p/w500${episode.stillPath}'
-                    : 'https://www.rrcampus.com/images/no-video.jpg',
-                placeholder: (context, url) => Center(
-                  child: CircularProgressIndicator(),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'Episode ${episode.episodeNumber.toString()}',
+                  style: kSubtitle,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    'Episode ${episode.episodeNumber.toString()}',
-                    style: kSubtitle,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                Text(
-                  _showDuration(episode.runtime ?? 0),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              episode.overview,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ],
-        ),
+              Text(
+                _showDuration(episode.runtime ?? 0),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            episode.overview,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
       ),
     );
   }

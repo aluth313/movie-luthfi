@@ -110,7 +110,6 @@ void main() {
       provider.fetchPopularMovies();
       // assert
       expect(provider.popularMoviesState, RequestState.Loading);
-      // verify(provider.setState(RequestState.Loading));
     });
 
     test('should change movies data when data is gotten successfully',
