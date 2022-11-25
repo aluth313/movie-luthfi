@@ -96,6 +96,14 @@ final testWatchlistMovie = Movie.watchlist(
   overview: 'overview',
 );
 
+final testWatchlistSeries = Tv.watchlist(
+  id: 1,
+  name: 'All of Us Are Dead',
+  posterPath: '/8gjbGKe5WNOaLrkoeOUPLvDhPhK.jpg',
+  overview:
+      'A high school becomes ground zero for a zombie virus outbreak. Trapped students must fight their way out — or turn into one of the rabid infected.',
+);
+
 final testMovieTable = MovieTable(
   id: 1,
   title: 'title',
@@ -105,9 +113,10 @@ final testMovieTable = MovieTable(
 
 final testSeriesTable = TvTable(
   id: 1,
-  name: 'name',
-  posterPath: '/1JupR6vLoYYJb1ySERUCZ3k1qJW.jpg',
-  overview: 'overview',
+  name: 'All of Us Are Dead',
+  posterPath: '/8gjbGKe5WNOaLrkoeOUPLvDhPhK.jpg',
+  overview:
+      'A high school becomes ground zero for a zombie virus outbreak. Trapped students must fight their way out — or turn into one of the rabid infected.',
 );
 
 final testMovieMap = {
@@ -119,7 +128,8 @@ final testMovieMap = {
 
 final testSeriesMap = {
   'id': 1,
-  'overview': 'overview',
-  'posterPath': '/1JupR6vLoYYJb1ySERUCZ3k1qJW.jpg',
-  'name': 'name',
+  'overview':
+      'A high school becomes ground zero for a zombie virus outbreak. Trapped students must fight their way out — or turn into one of the rabid infected.',
+  'posterPath': '/8gjbGKe5WNOaLrkoeOUPLvDhPhK.jpg',
+  'name': 'All of Us Are Dead',
 };
