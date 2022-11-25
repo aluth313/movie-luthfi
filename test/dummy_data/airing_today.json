@@ -1,0 +1,27 @@
+{
+    "page": 1,
+    "results": [
+        {
+            "backdrop_path": "/hIZFG7MK4leU4axRFKJWqrjhmxZ.jpg",
+            "first_air_date": "2022-10-20",
+            "genre_ids": [
+                10765,
+                18
+            ],
+            "id": 95403,
+            "name": "The Peripheral",
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "The Peripheral",
+            "overview": "Stuck in a small Appalachian town",
+            "popularity": 1675.293,
+            "poster_path": "/ccBe5BVeibdBEQU7l6P6BubajWV.jpg",
+            "vote_average": 8.3,
+            "vote_count": 274
+        }
+    ],
+    "total_pages": 16,
+    "total_results": 310
+}
