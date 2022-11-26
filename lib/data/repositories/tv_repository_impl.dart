@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ditonton/data/datasources/tv_local_data_source.dart';
 import 'package:ditonton/data/datasources/tv_remote_data_source.dart';
 import 'package:ditonton/data/models/tv_table.dart';
+import 'package:ditonton/domain/entities/episode.dart';
 import 'package:ditonton/domain/entities/episodes.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/common/exception.dart';
@@ -69,12 +70,12 @@ class TvRepositoryImpl implements TvRepository {
   }
 
   @override
-  Future<Either<Failure, Episodes>> getEpisodesBySessionNumber(
+  Future<Either<Failure, List<Episode>>> getEpisodesBySessionNumber(
       int tvId, int sesionNumber) async {
     try {
       final result =
           await remoteDataSource.getEpisodesBySessionNumber(tvId, sesionNumber);
-      return Right(result.toEntity());
+      return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
       return Left(ServerFailure(''));
     } on SocketException {

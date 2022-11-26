@@ -247,13 +247,13 @@ class DetailContent extends StatelessWidget {
                                           RequestState.Loaded) {
                                         return EpisodeCard(
                                           episode: dataEpisode
-                                              .episodes.episodes[index],
+                                              .episodes[index],
                                         );
                                       }
                                       return Container();
                                     },
                                     itemCount:
-                                        dataEpisode.episodes.episodes.length,
+                                        dataEpisode.episodes.length,
                                   ),
                                 );
                               },

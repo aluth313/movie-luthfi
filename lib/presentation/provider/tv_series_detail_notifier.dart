@@ -1,3 +1,4 @@
+import 'package:ditonton/domain/entities/episode.dart';
 import 'package:ditonton/domain/entities/episodes.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
@@ -43,8 +44,8 @@ class TvSeriesDetailNotifier extends ChangeNotifier {
   RequestState _recommendationState = RequestState.Empty;
   RequestState get recommendationState => _recommendationState;
 
-  late Episodes _episodes;
-  Episodes get episodes => _episodes;
+  List<Episode> _episodes = [];
+  List<Episode> get episodes => _episodes;
 
   RequestState _episodeState = RequestState.Empty;
   RequestState get episodeState => _episodeState;

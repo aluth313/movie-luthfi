@@ -6,9 +6,9 @@
 import 'dart:async' as _i13;
 import 'dart:ui' as _i14;
 
-import 'package:ditonton/common/state_enum.dart' as _i11;
-import 'package:ditonton/domain/entities/episodes.dart' as _i9;
-import 'package:ditonton/domain/entities/tv.dart' as _i12;
+import 'package:ditonton/common/state_enum.dart' as _i10;
+import 'package:ditonton/domain/entities/episode.dart' as _i12;
+import 'package:ditonton/domain/entities/tv.dart' as _i11;
 import 'package:ditonton/domain/entities/tv_detail.dart' as _i8;
 import 'package:ditonton/domain/usecases/get_episodes.dart' as _i4;
 import 'package:ditonton/domain/usecases/get_tv_series_detail.dart' as _i2;
@@ -20,7 +20,7 @@ import 'package:ditonton/domain/usecases/remove_watchlist_tv_series.dart'
     as _i7;
 import 'package:ditonton/domain/usecases/save_watchlist_tv_series.dart' as _i6;
 import 'package:ditonton/presentation/provider/tv_series_detail_notifier.dart'
-    as _i10;
+    as _i9;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -74,16 +74,11 @@ class _FakeTvDetail_6 extends _i1.SmartFake implements _i8.TvDetail {
       : super(parent, parentInvocation);
 }
 
-class _FakeEpisodes_7 extends _i1.SmartFake implements _i9.Episodes {
-  _FakeEpisodes_7(Object parent, Invocation parentInvocation)
-      : super(parent, parentInvocation);
-}
-
 /// A class which mocks [TvSeriesDetailNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTvSeriesDetailNotifier extends _i1.Mock
-    implements _i10.TvSeriesDetailNotifier {
+    implements _i9.TvSeriesDetailNotifier {
   MockTvSeriesDetailNotifier() {
     _i1.throwOnMissingStub(this);
   }
@@ -129,33 +124,33 @@ class MockTvSeriesDetailNotifier extends _i1.Mock
           returnValue: _FakeTvDetail_6(this, Invocation.getter(#series)))
       as _i8.TvDetail);
   @override
-  _i11.RequestState get tvSeriesState =>
+  _i10.RequestState get tvSeriesState =>
       (super.noSuchMethod(Invocation.getter(#tvSeriesState),
-          returnValue: _i11.RequestState.Empty) as _i11.RequestState);
+          returnValue: _i10.RequestState.Empty) as _i10.RequestState);
   @override
-  List<_i12.Tv> get tvSeriesRecommendations =>
+  List<_i11.Tv> get tvSeriesRecommendations =>
       (super.noSuchMethod(Invocation.getter(#tvSeriesRecommendations),
-          returnValue: <_i12.Tv>[]) as List<_i12.Tv>);
+          returnValue: <_i11.Tv>[]) as List<_i11.Tv>);
   @override
-  _i11.RequestState get recommendationState =>
+  _i10.RequestState get recommendationState =>
       (super.noSuchMethod(Invocation.getter(#recommendationState),
-          returnValue: _i11.RequestState.Empty) as _i11.RequestState);
+          returnValue: _i10.RequestState.Empty) as _i10.RequestState);
   @override
-  _i9.Episodes get episodes => (super.noSuchMethod(Invocation.getter(#episodes),
-          returnValue: _FakeEpisodes_7(this, Invocation.getter(#episodes)))
-      as _i9.Episodes);
+  List<_i12.Episode> get episodes =>
+      (super.noSuchMethod(Invocation.getter(#episodes),
+          returnValue: <_i12.Episode>[]) as List<_i12.Episode>);
   @override
-  _i11.RequestState get episodeState =>
+  _i10.RequestState get episodeState =>
       (super.noSuchMethod(Invocation.getter(#episodeState),
-          returnValue: _i11.RequestState.Empty) as _i11.RequestState);
+          returnValue: _i10.RequestState.Empty) as _i10.RequestState);
   @override
   int get selectedSessionId =>
       (super.noSuchMethod(Invocation.getter(#selectedSessionId), returnValue: 0)
           as int);
   @override
-  _i11.RequestState get selectedSeasonIdState =>
+  _i10.RequestState get selectedSeasonIdState =>
       (super.noSuchMethod(Invocation.getter(#selectedSeasonIdState),
-          returnValue: _i11.RequestState.Empty) as _i11.RequestState);
+          returnValue: _i10.RequestState.Empty) as _i10.RequestState);
   @override
   String get message =>
       (super.noSuchMethod(Invocation.getter(#message), returnValue: '')

@@ -79,15 +79,13 @@ final testSeriesDetail = TvDetail(
   voteAverage: 8.424,
 );
 
-final testEpisode = Episodes(episodes: [
-  Episode(
+final testEpisode = Episode(
     episodeNumber: 1,
     runtime: 66,
     stillPath: '/1JupR6vLoYYJb1ySERUCZ3k1qJW.jpg',
     overview:
         'Inside Lee Byeong-chan\'s science lab, a student incurs a seemingly harmless bite. Shortly after, a fast-spreading outbreak soaks the school in blood.',
-  )
-]);
+  );
 
 final testWatchlistMovie = Movie.watchlist(
   id: 1,

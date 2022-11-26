@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ditonton/data/models/episode_model.dart';
 import 'package:ditonton/data/models/episode_response.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/data/models/tv_model.dart';
@@ -11,7 +12,7 @@ abstract class TvRemoteDataSource {
   Future<List<TVModel>> getPopularTVSeries();
   Future<TvSeriesDetailResponse> getTvSeriesDetail(int id);
   Future<List<TVModel>> getTvSeriesRecommendations(int id);
-  Future<EpisodeResponse> getEpisodesBySessionNumber(
+  Future<List<EpisodeModel>> getEpisodesBySessionNumber(
       int tvId, int sessionNumber);
   Future<List<TVModel>> getTopRatedSeries();
   Future<List<TVModel>> getAiringTodaySeries();
@@ -98,13 +99,13 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
   }
 
   @override
-  Future<EpisodeResponse> getEpisodesBySessionNumber(
+  Future<List<EpisodeModel>> getEpisodesBySessionNumber(
       int tvId, int sessionNumber) async {
     final response = await client
         .get(Uri.parse('$BASE_URL/tv/$tvId/season/$sessionNumber?$API_KEY'));
 
     if (response.statusCode == 200) {
-      return EpisodeResponse.fromJson(json.decode(response.body));
+      return EpisodeResponse.fromJson(json.decode(response.body)).episodes;
     } else {
       throw ServerException();
     }

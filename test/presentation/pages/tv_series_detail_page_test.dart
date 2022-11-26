@@ -34,7 +34,7 @@ void main() {
     when(mockNotifier.selectedSeasonIdState).thenReturn(RequestState.Loaded);
     when(mockNotifier.selectedSessionId).thenReturn(1);
     when(mockNotifier.episodeState).thenReturn(RequestState.Loaded);
-    when(mockNotifier.episodes).thenReturn(testEpisode);
+    when(mockNotifier.episodes).thenReturn([testEpisode]);
     when(mockNotifier.tvSeriesState).thenReturn(RequestState.Loaded);
     when(mockNotifier.series).thenReturn(testSeriesDetail);
     when(mockNotifier.recommendationState).thenReturn(RequestState.Loaded);
@@ -54,7 +54,7 @@ void main() {
     when(mockNotifier.selectedSeasonIdState).thenReturn(RequestState.Loaded);
     when(mockNotifier.selectedSessionId).thenReturn(1);
     when(mockNotifier.episodeState).thenReturn(RequestState.Loaded);
-    when(mockNotifier.episodes).thenReturn(testEpisode);
+    when(mockNotifier.episodes).thenReturn([testEpisode]);
     when(mockNotifier.tvSeriesState).thenReturn(RequestState.Loaded);
     when(mockNotifier.series).thenReturn(testSeriesDetail);
     when(mockNotifier.recommendationState).thenReturn(RequestState.Loaded);
@@ -74,7 +74,7 @@ void main() {
     when(mockNotifier.selectedSeasonIdState).thenReturn(RequestState.Loaded);
     when(mockNotifier.selectedSessionId).thenReturn(1);
     when(mockNotifier.episodeState).thenReturn(RequestState.Loaded);
-    when(mockNotifier.episodes).thenReturn(testEpisode);
+    when(mockNotifier.episodes).thenReturn([testEpisode]);
     when(mockNotifier.tvSeriesState).thenReturn(RequestState.Loaded);
     when(mockNotifier.series).thenReturn(testSeriesDetail);
     when(mockNotifier.recommendationState).thenReturn(RequestState.Loaded);
@@ -101,7 +101,7 @@ void main() {
     when(mockNotifier.selectedSeasonIdState).thenReturn(RequestState.Loaded);
     when(mockNotifier.selectedSessionId).thenReturn(1);
     when(mockNotifier.episodeState).thenReturn(RequestState.Loaded);
-    when(mockNotifier.episodes).thenReturn(testEpisode);
+    when(mockNotifier.episodes).thenReturn([testEpisode]);
     when(mockNotifier.tvSeriesState).thenReturn(RequestState.Loaded);
     when(mockNotifier.series).thenReturn(testSeriesDetail);
     when(mockNotifier.recommendationState).thenReturn(RequestState.Loaded);
