@@ -41,7 +41,7 @@ class DatabaseHelper {
         posterPath TEXT
       );
     ''');
-    
+
     await db.execute('''
       CREATE TABLE  $_tblWatchlistSeries (
         id INTEGER PRIMARY KEY,
@@ -56,7 +56,7 @@ class DatabaseHelper {
     final db = await database;
     return await db!.insert(_tblWatchlist, movie.toJson());
   }
-  
+
   Future<int> insertWatchlistSeries(TvTable series) async {
     final db = await database;
     return await db!.insert(_tblWatchlistSeries, series.toJson());
@@ -70,7 +70,7 @@ class DatabaseHelper {
       whereArgs: [movie.id],
     );
   }
-  
+
   Future<int> removeWatchlistSeries(TvTable series) async {
     final db = await database;
     return await db!.delete(
@@ -94,7 +94,7 @@ class DatabaseHelper {
       return null;
     }
   }
-  
+
   Future<Map<String, dynamic>?> getSeriesById(int id) async {
     final db = await database;
     final results = await db!.query(
@@ -116,10 +116,11 @@ class DatabaseHelper {
 
     return results;
   }
-  
+
   Future<List<Map<String, dynamic>>> getWatchlistSeries() async {
     final db = await database;
-    final List<Map<String, dynamic>> results = await db!.query(_tblWatchlistSeries);
+    final List<Map<String, dynamic>> results =
+        await db!.query(_tblWatchlistSeries);
 
     return results;
   }

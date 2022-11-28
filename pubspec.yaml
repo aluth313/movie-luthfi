@@ -47,6 +47,7 @@ dev_dependencies:
   integration_test:
     sdk: flutter
   test: any
+  sqflite_common_ffi: ^2.2.0+1
 
 
 # For information on the generic Dart part of this file, see the

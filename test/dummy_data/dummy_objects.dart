@@ -1,7 +1,6 @@
 import 'package:ditonton/data/models/movie_table.dart';
 import 'package:ditonton/data/models/tv_table.dart';
 import 'package:ditonton/domain/entities/episode.dart';
-import 'package:ditonton/domain/entities/episodes.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
@@ -80,12 +79,12 @@ final testSeriesDetail = TvDetail(
 );
 
 final testEpisode = Episode(
-    episodeNumber: 1,
-    runtime: 66,
-    stillPath: '/1JupR6vLoYYJb1ySERUCZ3k1qJW.jpg',
-    overview:
-        'Inside Lee Byeong-chan\'s science lab, a student incurs a seemingly harmless bite. Shortly after, a fast-spreading outbreak soaks the school in blood.',
-  );
+  episodeNumber: 1,
+  runtime: 66,
+  stillPath: '/1JupR6vLoYYJb1ySERUCZ3k1qJW.jpg',
+  overview:
+      'Inside Lee Byeong-chan\'s science lab, a student incurs a seemingly harmless bite. Shortly after, a fast-spreading outbreak soaks the school in blood.',
+);
 
 final testWatchlistMovie = Movie.watchlist(
   id: 1,
