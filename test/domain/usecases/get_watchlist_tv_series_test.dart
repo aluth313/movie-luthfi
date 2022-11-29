@@ -1,29 +1,27 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/domain/entities/tv.dart';
-import 'package:ditonton/domain/usecases/get_airing_today_tv_series.dart';
+import 'package:ditonton/domain/usecases/get_watchlist_tv_series.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late GetAiringTodaySeries usecase;
+  late GetWatchlistSeries usecase;
   late MockTvRepository mockTvRepository;
 
   setUp(() {
     mockTvRepository = MockTvRepository();
-    usecase = GetAiringTodaySeries(mockTvRepository);
+    usecase = GetWatchlistSeries(mockTvRepository);
   });
-
-  final tSeries = <Tv>[];
 
   test('should get list of series from the repository', () async {
     // arrange
-    when(mockTvRepository.getAiringTodaySeries())
-        .thenAnswer((_) async => Right(tSeries));
+    when(mockTvRepository.getWatchlistSeries())
+        .thenAnswer((_) async => Right(testSeriesList));
     // act
     final result = await usecase.execute();
     // assert
-    expect(result, Right(tSeries));
+    expect(result, Right(testSeriesList));
   });
 }

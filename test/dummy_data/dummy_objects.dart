@@ -43,6 +43,7 @@ final tSeries = Tv(
 );
 
 final testMovieList = [testMovie];
+final testSeriesList = [tSeries];
 
 final testMovieDetail = MovieDetail(
   adult: false,

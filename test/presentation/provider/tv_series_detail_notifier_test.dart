@@ -1,22 +1,13 @@
-import 'dart:async';
-
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/domain/entities/episode.dart';
-import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/usecases/get_episodes.dart';
-import 'package:ditonton/domain/usecases/get_movie_detail.dart';
-import 'package:ditonton/domain/usecases/get_movie_recommendations.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/usecases/get_tv_series_detail.dart';
 import 'package:ditonton/domain/usecases/get_tv_series_recommendations.dart';
-import 'package:ditonton/domain/usecases/get_watchlist_status.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_tv_series_status.dart';
-import 'package:ditonton/domain/usecases/remove_watchlist.dart';
 import 'package:ditonton/domain/usecases/remove_watchlist_tv_series.dart';
-import 'package:ditonton/domain/usecases/save_watchlist.dart';
 import 'package:ditonton/domain/usecases/save_watchlist_tv_series.dart';
-import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation/provider/tv_series_detail_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -24,7 +15,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../dummy_data/dummy_objects.dart';
-import 'movie_detail_notifier_test.mocks.dart';
 import 'tv_series_detail_notifier_test.mocks.dart';
 
 @GenerateMocks([
@@ -124,28 +114,6 @@ void main() {
       expect(provider.tvSeriesState, RequestState.Loading);
       expect(listenerCallCount, 1);
     });
-
-    // test('should change series when data is gotten successfully', () {
-    //   // arrange
-    //   _arrangeUsecase();
-    //   // act
-    //   provider.fetchTvSeriesDetail(tId);
-    //   // assert
-    //   expect(provider.tvSeriesState, RequestState.Loaded);
-    //   expect(provider.series, testSeriesDetail);
-    //   expect(listenerCallCount, 3);
-    // });
-
-    // test('should change recommendation series when data is gotten successfully',
-    //     () async {
-    //   // arrange
-    //   _arrangeUsecase();
-    //   // act
-    //   await provider.fetchTvSeriesDetail(tId);
-    //   // assert
-    //   expect(provider.tvSeriesState, RequestState.Loaded);
-    //   expect(provider.tvSeriesRecommendations, tSeriesList);
-    // });
   });
 
   group('Get Episodes', () {
@@ -157,44 +125,6 @@ void main() {
       verify(mockGetEpisodes.execute(tId, seasonNumber));
     });
   });
-
-  // group('Get Series Recommendations', () {
-  //   test('should get data from the usecase', () async {
-  //     // arrange
-  //     _arrangeUsecase();
-  //     // act
-  //     await provider.fetchTvSeriesDetail(tId);
-  //     // assert
-  //     verify(mockGetTvSeriesRecommendations.execute(tId));
-  //     expect(provider.tvSeriesRecommendations, tSeriesList);
-  //   });
-
-  //   test('should update recommendation state when data is gotten successfully',
-  //       () async {
-  //     // arrange
-  //     _arrangeUsecase();
-  //     // act
-  //     await provider.fetchTvSeriesDetail(tId);
-  //     // assert
-  //     expect(provider.recommendationState, RequestState.Loaded);
-  //     expect(provider.tvSeriesRecommendations, tSeriesList);
-  //   });
-
-  //   test('should update error message when request in successful', () async {
-  //     // arrange
-  //     when(mockGetTvSeriesDetail.execute(tId))
-  //         .thenAnswer((_) async => Right(testSeriesDetail));
-  //     when(mockGetTvSeriesRecommendations.execute(tId))
-  //         .thenAnswer((_) async => Left(ServerFailure('Failed')));
-  //     when(mockGetEpisodes.execute(tId, seasonNumber))
-  //         .thenAnswer((_) async => Right(tEpisodes));
-  //     // act
-  //     await provider.fetchTvSeriesDetail(tId);
-  //     // assert
-  //     expect(provider.recommendationState, RequestState.Error);
-  //     expect(provider.message, 'Failed');
-  //   });
-  // });
 
   group('Watchlist', () {
     test('should get the watchlist status', () async {
