@@ -285,7 +285,7 @@ class MovieList extends StatelessWidget {
 
 class TvList extends StatelessWidget {
   final List<Tv> tvSeries;
-  String seriesKey;
+  final String seriesKey;
 
   TvList(this.tvSeries, this.seriesKey);
 

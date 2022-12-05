@@ -38,17 +38,6 @@ class TvSeriesDetailResponse extends Equatable {
         voteAverage: json["vote_average"].toDouble(),
       );
 
-  Map<String, dynamic> toJson() => {
-        "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
-        "seasons": List<dynamic>.from(genres.map((x) => x.toJson())),
-        "id": id,
-        "overview": overview,
-        "poster_path": posterPath,
-        "episode_run_time": runtime,
-        "name": name,
-        "vote_average": voteAverage,
-      };
-
   TvDetail toEntity() {
     return TvDetail(
       genres: this.genres.map((genre) => genre.toEntity()).toList(),
