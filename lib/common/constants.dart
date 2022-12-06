@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 const String BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
@@ -46,10 +43,3 @@ const kColorScheme = ColorScheme(
   onError: Colors.white,
   brightness: Brightness.dark,
 );
-
-Future<SecurityContext> get globalContext async {
-  final sslCert = await rootBundle.load('certificates/certificates.pem');
-  SecurityContext securityContext = SecurityContext(withTrustedRoots: false);
-  securityContext.setTrustedCertificatesBytes(sslCert.buffer.asInt8List());
-  return securityContext;
-}
