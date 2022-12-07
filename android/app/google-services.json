@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "762440014125",
+    "project_id": "movie-luthfi",
+    "storage_bucket": "movie-luthfi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762440014125:android:ce085001be5012c7921ba4",
+        "android_client_info": {
+          "package_name": "com.dicoding.ditonton"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "762440014125-mb38bvdv6k1ql7md906dvhv3ucella8n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLvXd0I5VkhlGHNMq8oanlOIpAxJimrmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "762440014125-mb38bvdv6k1ql7md906dvhv3ucella8n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
