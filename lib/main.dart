@@ -2,6 +2,7 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/utils.dart';
 import 'package:ditonton/data/datasources/http_ssl_pinning.dart';
 import 'package:ditonton/firebase_options.dart';
+import 'package:ditonton/presentation/bloc/airing_today_tv_series_bloc.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/airing_today_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
@@ -28,6 +29,7 @@ import 'package:ditonton/presentation/provider/watchlist_tv_series_notifier.dart
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 
@@ -83,6 +85,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<AiringTodaySeriesNotifier>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<AiringTodayTvSeriesBloc>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TvSeriesSearchNotifier>(),
