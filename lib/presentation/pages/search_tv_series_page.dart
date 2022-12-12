@@ -38,16 +38,22 @@ class SearchSeriesPage extends StatelessWidget {
                 );
               } else if (state is TvSeriesSearchHasData) {
                 final result = state.result;
-                return Expanded(
-                  child: ListView.builder(
-                    padding: const EdgeInsets.all(8),
-                    itemBuilder: (context, index) {
-                      final series = result[index];
-                      return TvSeriesCard(series);
-                    },
-                    itemCount: result.length,
-                  ),
-                );
+                return result.length > 0
+                    ? Expanded(
+                        child: ListView.builder(
+                          padding: const EdgeInsets.all(8),
+                          itemBuilder: (context, index) {
+                            final series = result[index];
+                            return TvSeriesCard(series);
+                          },
+                          itemCount: result.length,
+                        ),
+                      )
+                    : Expanded(
+                        child: Center(
+                          child: Text('Series not found.'),
+                        ),
+                      );
               } else if (state is TvSeriesSearchError) {
                 return Expanded(
                   child: Center(
