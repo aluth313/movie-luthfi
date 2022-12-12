@@ -15,7 +15,6 @@ class TvSeriesDetailBloc
       final id = event.id;
 
       emit(TvSeriesDetailLoading());
-      // emit(SelectedSeasonIdEmpty());
       final result = await _getTvSeriesDetail.execute(id);
 
       result.fold(
