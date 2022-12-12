@@ -5,6 +5,7 @@ import 'package:ditonton/firebase_options.dart';
 import 'package:ditonton/presentation/bloc/airing_today_tv_series_bloc.dart';
 import 'package:ditonton/presentation/bloc/episodes_bloc.dart';
 import 'package:ditonton/presentation/bloc/now_playing_movies_bloc.dart';
+import 'package:ditonton/presentation/bloc/popular_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/popular_tv_series_bloc.dart';
 import 'package:ditonton/presentation/bloc/selected_season_bloc.dart';
 import 'package:ditonton/presentation/bloc/top_rated_tv_series_bloc.dart';
@@ -120,6 +121,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<NowPlayingMoviesBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<PopularMoviesBloc>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TvSeriesSearchNotifier>(),
