@@ -40,8 +40,6 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
       context
           .read<WatchlistTvSeriesStatusBloc>()
           .add(LoadWatchlistStatus(widget.id));
-      Provider.of<TvSeriesDetailNotifier>(context, listen: false)
-          .loadWatchlistStatus(widget.id);
     });
   }
 
