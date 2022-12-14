@@ -5,6 +5,7 @@ import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/presentation/bloc/movie_detail_bloc.dart';
 import 'package:ditonton/presentation/bloc/movies_recommendations_bloc.dart';
+import 'package:ditonton/presentation/bloc/watchlist_movie_status_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist_movies_bloc.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
@@ -34,7 +35,9 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
       context
           .read<MoviesRecommendationsBloc>()
           .add(FetchRecommendations(widget.id));
-      context.read<WatchlistMoviesBloc>().add(LoadWatchlistStatus(widget.id));
+      context
+          .read<WatchlistMovieStatusBloc>()
+          .add(LoadWatchlistStatus(widget.id));
       // Provider.of<MovieDetailNotifier>(context, listen: false)
       //     .loadWatchlistStatus(widget.id);
     });
@@ -135,8 +138,8 @@ class DetailContent extends StatelessWidget {
                                 movie.title,
                                 style: kHeading5,
                               ),
-                              BlocBuilder<WatchlistMoviesBloc,
-                                  WatchlistMoviesState>(
+                              BlocBuilder<WatchlistMovieStatusBloc,
+                                  WatchlistMovieStatusState>(
                                 builder: (context, state) {
                                   return ElevatedButton(
                                     onPressed: () async {
@@ -147,6 +150,10 @@ class DetailContent extends StatelessWidget {
                                           : context
                                               .read<WatchlistMoviesBloc>()
                                               .add(AddWatchlist(movie));
+
+                                      context
+                                          .read<WatchlistMovieStatusBloc>()
+                                          .add(LoadWatchlistStatus(movie.id));
                                     },
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,

@@ -9,6 +9,7 @@ import 'package:ditonton/presentation/bloc/selected_season_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_series_detail_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_series_recommendations_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist_tv_series_bloc.dart';
+import 'package:ditonton/presentation/bloc/watchlist_tv_series_status_bloc.dart';
 import 'package:ditonton/presentation/provider/tv_series_detail_notifier.dart';
 import 'package:ditonton/presentation/widgets/episode_card_list.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,9 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
       context
           .read<TvSeriesRecommendationsBloc>()
           .add(FetchRecommendations(widget.id));
-      context.read<WatchlistTvSeriesBloc>().add(LoadWatchlistStatus(widget.id));
+      context
+          .read<WatchlistTvSeriesStatusBloc>()
+          .add(LoadWatchlistStatus(widget.id));
       Provider.of<TvSeriesDetailNotifier>(context, listen: false)
           .loadWatchlistStatus(widget.id);
     });
@@ -150,8 +153,8 @@ class DetailContent extends StatelessWidget {
                                 series.name!,
                                 style: kHeading5,
                               ),
-                              BlocBuilder<WatchlistTvSeriesBloc,
-                                  WatchlistTvSeriesState>(
+                              BlocBuilder<WatchlistTvSeriesStatusBloc,
+                                  WatchlistTvSeriesStatusState>(
                                 builder: (context, state) {
                                   return ElevatedButton(
                                     key: Key('watchlist_button_key'),
@@ -164,21 +167,9 @@ class DetailContent extends StatelessWidget {
                                           : context
                                               .read<WatchlistTvSeriesBloc>()
                                               .add(AddWatchlist(series));
-                                      // await Provider.of<TvSeriesDetailNotifier>(
-                                      //         context,
-                                      //         listen: false)
-                                      //     .addWatchlist(series);
-                                      // } else {
-                                      //   await Provider.of<TvSeriesDetailNotifier>(
-                                      //           context,
-                                      //           listen: false)
-                                      //       .removeFromWatchlist(series);
-                                      // }
-
-                                      // final message =
-                                      //     Provider.of<TvSeriesDetailNotifier>(context,
-                                      //             listen: false)
-                                      //         .watchlistMessage;
+                                      context
+                                          .read<WatchlistTvSeriesStatusBloc>()
+                                          .add(LoadWatchlistStatus(series.id));
                                     },
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,

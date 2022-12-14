@@ -16,8 +16,10 @@ import 'package:ditonton/presentation/bloc/top_rated_tv_series_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_series_detail_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_series_recommendations_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_series_search_bloc.dart';
+import 'package:ditonton/presentation/bloc/watchlist_movie_status_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist_tv_series_bloc.dart';
+import 'package:ditonton/presentation/bloc/watchlist_tv_series_status_bloc.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/airing_today_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
@@ -148,6 +150,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<MoviesSearchBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistMovieStatusBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistTvSeriesStatusBloc>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TvSeriesSearchNotifier>(),

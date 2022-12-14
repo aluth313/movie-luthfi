@@ -35,7 +35,3 @@ class WatchlistTvSeriesRemoved extends WatchlistTvSeriesState {
   @override
   List<Object> get props => [message];
 }
-
-class IsWatchlistTvSeries extends WatchlistTvSeriesState {}
-
-class IsNotWatchlistTvSeries extends WatchlistTvSeriesState {}
