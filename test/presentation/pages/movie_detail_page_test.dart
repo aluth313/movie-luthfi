@@ -93,6 +93,13 @@ void main() {
     );
   }
 
+  tearDown(() {
+    mockMovieDetailBloc.close();
+    mockMoviesRecommendationsBloc.close();
+    mockWatchlistMoviesBloc.close();
+    mockWatchlistMovieStatusBloc.close();
+  });
+
   testWidgets(
       'Watchlist button should display add icon when movie not added to watchlist',
       (WidgetTester tester) async {
@@ -205,7 +212,7 @@ void main() {
 
     expect(find.byIcon(Icons.add), findsOneWidget);
 
-    await tester.tap(watchlistButton);
+    await tester.tap(watchlistButton, warnIfMissed: false);
     await tester.pump();
 
     expect(find.byType(AlertDialog), findsOneWidget);
