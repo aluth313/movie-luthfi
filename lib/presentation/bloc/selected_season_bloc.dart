@@ -8,7 +8,6 @@ class SelectedSeasonBloc
     extends Bloc<SelectedSeasonEvent, SelectedSeasonState> {
   SelectedSeasonBloc() : super(SelectedSeasonEmpty()) {
     on<SelectedSeason>((event, emit) {
-      // emit(SelectedSeasonEmpty());
       emit(
         SelectedSeasonHasData(event.selectedSeason),
       );
