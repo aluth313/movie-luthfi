@@ -1,4 +1,4 @@
-import 'package:ditonton/common/constants.dart';
+import 'package:core/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

@@ -45,7 +45,9 @@ import 'package:ditonton/presentation/bloc/tv_series_recommendations_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_series_search_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist_movie_status_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist_movies_bloc.dart';
+import 'package:ditonton/presentation/bloc/watchlist_movies_data_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist_tv_series_bloc.dart';
+import 'package:ditonton/presentation/bloc/watchlist_tv_series_data_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist_tv_series_status_bloc.dart';
 import 'package:ditonton/presentation/provider/airing_today_tv_series_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
@@ -225,6 +227,16 @@ void init() {
   );
   locator.registerFactory(
     () => WatchlistMovieStatusBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => WatchlistMoviesDataBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => WatchlistTvSeriesDataBloc(
       locator(),
     ),
   );

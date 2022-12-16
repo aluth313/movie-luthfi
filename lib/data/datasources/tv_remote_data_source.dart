@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:ditonton/common/constants.dart';
+import 'package:core/common/constants.dart';
 import 'package:ditonton/data/models/episode_model.dart';
 import 'package:ditonton/data/models/episode_response.dart';
-import 'package:ditonton/common/exception.dart';
+import 'package:core/common/exception.dart';
 import 'package:ditonton/data/models/tv_model.dart';
 import 'package:ditonton/data/models/tv_response.dart';
 import 'package:ditonton/data/models/tv_series_detail_model.dart';

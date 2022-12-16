@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ditonton/domain/entities/episode.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/usecases/get_episodes.dart';
-import 'package:ditonton/common/failure.dart';
+import 'package:core/common/failure.dart';
 import 'package:ditonton/domain/usecases/get_tv_series_detail.dart';
 import 'package:ditonton/domain/usecases/get_tv_series_recommendations.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_tv_series_status.dart';

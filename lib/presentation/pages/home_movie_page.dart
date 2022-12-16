@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton/common/constants.dart';
+import 'package:core/common/constants.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/presentation/bloc/airing_today_tv_series_bloc.dart';
@@ -18,12 +18,8 @@ import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv_series_detail_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
-import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 class HomeMoviePage extends StatefulWidget {
   @override
@@ -38,12 +34,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
       context.read<NowPlayingMoviesBloc>().add(FetchNowPlayingMovies());
       context.read<PopularMoviesBloc>().add(FetchPopularMovies());
       context.read<TopRatedMoviesBloc>().add(FetchTopRatedMovies());
-    }
-        // Provider.of<MovieListNotifier>(context, listen: false)
-        //   ..fetchNowPlayingMovies()
-        //   ..fetchPopularMovies()
-        //   ..fetchTopRatedMovies()
-        );
+    });
     Future.microtask(() {
       context.read<PopularTvSeriesBloc>().add(
             FetchPopularTvSeries(),

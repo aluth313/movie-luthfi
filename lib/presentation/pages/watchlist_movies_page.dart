@@ -1,11 +1,13 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/common/utils.dart';
+import 'package:core/common/constants.dart';
+import 'package:core/common/utils.dart';
+import 'package:ditonton/presentation/bloc/watchlist_movies_data_bloc.dart';
+import 'package:ditonton/presentation/bloc/watchlist_tv_series_data_bloc.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_tv_series_notifier.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:ditonton/presentation/widgets/tv_series_card_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
@@ -21,11 +23,15 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<WatchlistMovieNotifier>(context, listen: false)
-            .fetchWatchlistMovies());
-    Future.microtask(() =>
-        Provider.of<WatchlistTvSeriesNotifier>(context, listen: false)
-            .fetchWatchlistSeries());
+        // Provider.of<WatchlistMovieNotifier>(context, listen: false)
+        //     .fetchWatchlistMovies()
+        context.read<WatchlistMoviesDataBloc>().add(FetchWatchlistMovies()));
+    Future.microtask(() => context
+            .read<WatchlistTvSeriesDataBloc>()
+            .add(FetchWatchlistSeries())
+        // Provider.of<WatchlistTvSeriesNotifier>(context, listen: false)
+        //     .fetchWatchlistSeries()
+        );
   }
 
   @override
@@ -35,10 +41,8 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
   }
 
   void didPopNext() {
-    Provider.of<WatchlistMovieNotifier>(context, listen: false)
-        .fetchWatchlistMovies();
-    Provider.of<WatchlistTvSeriesNotifier>(context, listen: false)
-        .fetchWatchlistSeries();
+    context.read<WatchlistMoviesDataBloc>().add(FetchWatchlistMovies());
+    context.read<WatchlistTvSeriesDataBloc>().add(FetchWatchlistSeries());
   }
 
   @override
@@ -52,14 +56,14 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Consumer<WatchlistMovieNotifier>(
-                builder: (context, data, child) {
-                  if (data.watchlistState == RequestState.Loading) {
+              BlocBuilder<WatchlistMoviesDataBloc, WatchlistMoviesDataState>(
+                builder: (context, state) {
+                  if (state is WatchlistMoviesDataLoading) {
                     return Center(
                       child: CircularProgressIndicator(),
                     );
-                  } else if (data.watchlistState == RequestState.Loaded) {
-                    return data.watchlistMovies.length > 0
+                  } else if (state is WatchlistMoviesDataHasData) {
+                    return state.result.length > 0
                         ? Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -75,18 +79,22 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
                                 physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
-                                  final movie = data.watchlistMovies[index];
+                                  final movie = state.result[index];
                                   return MovieCard(movie);
                                 },
-                                itemCount: data.watchlistMovies.length,
+                                itemCount: state.result.length,
                               ),
                             ],
                           )
                         : SizedBox();
-                  } else {
+                  } else if (state is WatchlistMoviesDataError) {
                     return Center(
                       key: Key('error_message'),
-                      child: Text(data.message),
+                      child: Text(state.message),
+                    );
+                  } else {
+                    return Center(
+                      child: Text('Failed'),
                     );
                   }
                 },

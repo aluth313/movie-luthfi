@@ -1,4 +1,4 @@
-import 'package:ditonton/common/constants.dart';
+import 'package:core/common/constants.dart';
 import 'package:ditonton/presentation/bloc/tv_series_search_bloc.dart';
 import 'package:ditonton/presentation/widgets/tv_series_card_list.dart';
 import 'package:flutter/material.dart';

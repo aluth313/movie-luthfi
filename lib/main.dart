@@ -1,5 +1,5 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/utils.dart';
+import 'package:core/common/constants.dart';
+import 'package:core/common/utils.dart';
 import 'package:ditonton/data/datasources/http_ssl_pinning.dart';
 import 'package:ditonton/firebase_options.dart';
 import 'package:ditonton/presentation/bloc/airing_today_tv_series_bloc.dart';
@@ -18,7 +18,9 @@ import 'package:ditonton/presentation/bloc/tv_series_recommendations_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_series_search_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist_movie_status_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist_movies_bloc.dart';
+import 'package:ditonton/presentation/bloc/watchlist_movies_data_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist_tv_series_bloc.dart';
+import 'package:ditonton/presentation/bloc/watchlist_tv_series_data_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist_tv_series_status_bloc.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/airing_today_tv_series_page.dart';
@@ -156,6 +158,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<WatchlistTvSeriesStatusBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistTvSeriesDataBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistMoviesDataBloc>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TvSeriesSearchNotifier>(),

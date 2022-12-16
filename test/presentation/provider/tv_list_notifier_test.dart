@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/usecases/get_airing_today_tv_series.dart';
-import 'package:ditonton/common/failure.dart';
+import 'package:core/common/failure.dart';
 import 'package:ditonton/domain/usecases/get_popular_tv.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_tv_series.dart';
 import 'package:ditonton/common/state_enum.dart';
