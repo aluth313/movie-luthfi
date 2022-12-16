@@ -2,13 +2,10 @@ import 'package:core/common/constants.dart';
 import 'package:core/common/utils.dart';
 import 'package:ditonton/presentation/bloc/watchlist_movies_data_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist_tv_series_data_bloc.dart';
-import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
-import 'package:ditonton/presentation/provider/watchlist_tv_series_notifier.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:ditonton/presentation/widgets/tv_series_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
   static const ROUTE_NAME = '/watchlist-movie';
@@ -99,14 +96,15 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
                   }
                 },
               ),
-              Consumer<WatchlistTvSeriesNotifier>(
-                builder: (context, data, child) {
-                  if (data.watchlistState == RequestState.Loading) {
+              BlocBuilder<WatchlistTvSeriesDataBloc,
+                  WatchlistTvSeriesDataState>(
+                builder: (context, state) {
+                  if (state is WatchlistTvSeriesDataLoading) {
                     return Center(
                       child: CircularProgressIndicator(),
                     );
-                  } else if (data.watchlistState == RequestState.Loaded) {
-                    return data.watchlistSeries.length > 0
+                  } else if (state is WatchlistTvSeriesDataHasData) {
+                    return state.result.length > 0
                         ? Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -121,18 +119,22 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
                                 physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
-                                  final series = data.watchlistSeries[index];
+                                  final series = state.result[index];
                                   return TvSeriesCard(series);
                                 },
-                                itemCount: data.watchlistSeries.length,
+                                itemCount: state.result.length,
                               ),
                             ],
                           )
                         : SizedBox();
-                  } else {
+                  } else if (state is WatchlistTvSeriesDataError) {
                     return Center(
                       key: Key('error_message'),
-                      child: Text(data.message),
+                      child: Text(state.message),
+                    );
+                  } else {
+                    return Center(
+                      child: Text('Failed'),
                     );
                   }
                 },
