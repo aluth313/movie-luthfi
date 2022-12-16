@@ -7,7 +7,7 @@ part 'airing_today_tv_series_event.dart';
 part 'airing_today_tv_series_state.dart';
 
 class AiringTodayTvSeriesBloc
-    extends Bloc<AiringTodayTvSeriesEvent, AiringTodayTvSeriesState> {
+    extends Bloc<FetchAiringTodaySeries, AiringTodayTvSeriesState> {
   final GetAiringTodaySeries _getAiringTodaySeries;
 
   AiringTodayTvSeriesBloc(this._getAiringTodaySeries)

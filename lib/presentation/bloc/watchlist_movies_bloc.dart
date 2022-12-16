@@ -18,6 +18,7 @@ class WatchlistMoviesBloc
   }) : super(WatchlistMoviesInitial()) {
     on<AddWatchlist>((event, emit) async {
       final movie = event.movie;
+      emit(WatchlistMoviesInitial());
       final result = await saveWatchlist.execute(movie);
 
       await result.fold(
@@ -32,6 +33,7 @@ class WatchlistMoviesBloc
 
     on<RemoveFromWatchlist>((event, emit) async {
       final movie = event.movie;
+      emit(WatchlistMoviesInitial());
       final result = await removeWatchlist.execute(movie);
 
       await result.fold(

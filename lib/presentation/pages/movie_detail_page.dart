@@ -29,8 +29,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      // Provider.of<MovieDetailNotifier>(context, listen: false)
-      //     .fetchMovieDetail(widget.id);
       context.read<MovieDetailBloc>().add(FetchMovieDetail(widget.id));
       context
           .read<MoviesRecommendationsBloc>()
@@ -38,8 +36,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
       context
           .read<WatchlistMovieStatusBloc>()
           .add(LoadWatchlistStatus(widget.id));
-      // Provider.of<MovieDetailNotifier>(context, listen: false)
-      //     .loadWatchlistStatus(widget.id);
     });
   }
 

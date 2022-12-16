@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
-import 'package:ditonton/domain/usecases/get_watchlist_tv_series_status.dart';
 import 'package:ditonton/domain/usecases/remove_watchlist_tv_series.dart';
 import 'package:ditonton/domain/usecases/save_watchlist_tv_series.dart';
 import 'package:equatable/equatable.dart';
@@ -19,6 +18,7 @@ class WatchlistTvSeriesBloc
   }) : super(WatchlistTvSeriesInitial()) {
     on<AddWatchlist>((event, emit) async {
       final series = event.series;
+      emit(WatchlistTvSeriesInitial());
       final result = await saveWatchlist.execute(series);
 
       await result.fold(
@@ -33,6 +33,7 @@ class WatchlistTvSeriesBloc
 
     on<RemoveFromWatchlist>((event, emit) async {
       final series = event.series;
+      emit(WatchlistTvSeriesInitial());
       final result = await removeWatchlist.execute(series);
 
       await result.fold(
