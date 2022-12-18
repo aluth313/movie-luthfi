@@ -1,4 +1,4 @@
-import 'package:ditonton/domain/entities/genre.dart';
+import 'package:movie/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/season.dart';
 import 'package:equatable/equatable.dart';
 

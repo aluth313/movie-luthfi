@@ -8,7 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../provider/tv_list_notifier_test.mocks.dart';
+import 'airing_today_tv_series_bloc_test.mocks.dart';
 
 @GenerateMocks([GetAiringTodaySeries])
 void main() {

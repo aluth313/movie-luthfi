@@ -1,5 +1,5 @@
 import 'package:core/common/exception.dart';
-import 'package:ditonton/data/datasources/db/database_helper.dart';
+import 'package:core/data/datasources/db/database_helper.dart';
 import 'package:ditonton/data/models/tv_table.dart';
 
 abstract class TvLocalDataSource {

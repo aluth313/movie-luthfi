@@ -5,14 +5,20 @@ homepage:
 
 environment:
   sdk: '>=2.18.4 <3.0.0'
-  flutter: ">=1.17.0"
+  flutter: '>=1.17.0'
 
 dependencies:
   flutter:
     sdk: flutter
+  ditonton:
+    path: ../
+  movie:
+    path: ../movie
 
   equatable: ^2.0.2
   google_fonts: ^3.0.1
+  sqflite: ^2.0.0+3
+  http: ^0.13.3
 
 dev_dependencies:
   flutter_test:
@@ -24,7 +30,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  uses-material-design: true
   # To add assets to your package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -35,7 +41,6 @@ flutter:
   #
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
-
   # To add custom fonts to your package, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
