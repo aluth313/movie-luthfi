@@ -64,7 +64,6 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
             return SafeArea(
               child: DetailContent(
                 series,
-                // false,
               ),
             );
           } else if (stateDetail is TvSeriesDetailError) {
@@ -80,8 +79,6 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
 
 class DetailContent extends StatelessWidget {
   final TvDetail series;
-  // final List<Tv> recommendations;
-  // final bool isAddedWatchlist;
 
   DetailContent(this.series);
 
@@ -153,7 +150,6 @@ class DetailContent extends StatelessWidget {
                                   return ElevatedButton(
                                     key: Key('watchlist_button_key'),
                                     onPressed: () async {
-                                      // if (!isAddedWatchlist) {
                                       state is IsWatchlistTvSeries
                                           ? context
                                               .read<WatchlistTvSeriesBloc>()

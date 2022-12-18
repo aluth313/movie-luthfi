@@ -64,8 +64,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
 class DetailContent extends StatelessWidget {
   final MovieDetail movie;
-  // final List<Movie> recommendations;
-  // final bool isAddedWatchlist;
 
   DetailContent(this.movie);
 

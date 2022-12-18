@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:series/domain/entities/episode.dart';
 import 'package:series/domain/usecases/get_episodes.dart';
 import 'package:equatable/equatable.dart';

@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:series/domain/entities/tv_detail.dart';
 import 'package:series/domain/usecases/remove_watchlist_tv_series.dart';
 import 'package:series/domain/usecases/save_watchlist_tv_series.dart';
