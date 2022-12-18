@@ -1,4 +1,4 @@
-import 'package:ditonton/presentation/pages/search_tv_series_page.dart';
+import 'package:series/presentation/pages/search_tv_series_page.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/presentation/pages/search_movies_page.dart';
 

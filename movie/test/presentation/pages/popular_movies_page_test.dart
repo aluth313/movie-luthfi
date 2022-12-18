@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../../test/dummy_data/dummy_objects.dart';
+import '../../dummy_data/dummy_objects.dart';
 
 class MockPopularMoviesBloc
     extends MockBloc<PopularMoviesEvent, PopularMoviesState>

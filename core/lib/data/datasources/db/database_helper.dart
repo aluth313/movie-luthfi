@@ -1,7 +1,7 @@
 // coverage:ignore-file
 import 'dart:async';
 
-import 'package:ditonton/data/models/tv_table.dart';
+import 'package:series/data/models/tv_table.dart';
 import 'package:movie/data/models/movie_table.dart';
 import 'package:sqflite/sqflite.dart';
 

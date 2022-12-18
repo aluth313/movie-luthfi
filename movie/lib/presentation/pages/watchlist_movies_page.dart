@@ -1,9 +1,9 @@
 import 'package:core/common/constants.dart';
 import 'package:core/common/utils.dart';
 import 'package:movie/presentation/bloc/watchlist_movies_data_bloc.dart';
-import 'package:ditonton/presentation/bloc/watchlist_tv_series_data_bloc.dart';
+import 'package:series/presentation/bloc/watchlist_tv_series_data_bloc.dart';
 import 'package:movie/presentation/widgets/movie_card_list.dart';
-import 'package:ditonton/presentation/widgets/tv_series_card_list.dart';
+import 'package:series/presentation/widgets/tv_series_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
