@@ -2,6 +2,14 @@
 
 # a199-flutter-expert-project
 
+dashboard analytics firebase
+![image](https://user-images.githubusercontent.com/50536458/208399503-697f7aa4-f210-487b-a32e-1ed2bbdf27ad.png)
+
+crashlytics firebase
+![image](https://user-images.githubusercontent.com/50536458/208399637-7f41831c-fb40-4159-81be-e8c972f664cb.png)
+
+
+
 Repository ini merupakan starter project submission kelas Flutter Expert Dicoding Indonesia.
 
 ---
